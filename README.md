@@ -1,328 +1,205 @@
- <div align="center">
+<div align="center">
 
-# ⚡ FAMPAY GATEWAY
+# ⚡ Fampay Gateway
 
-### Premium UPI Payment Gateway for Paymenter v2
+### Premium FamPay UPI Payment Gateway for Paymenter
 
-**Seamless UPI payments. Automated Gmail verification. Real-time payment tracking.**
+**Accept UPI payments instantly with QR codes, mobile deep-linking, automatic Gmail verification, and real-time Discord logging.**
 
-Accept payments through FamPay with dynamic QR codes, UPI deep links, automatic Gmail transaction verification, and Discord notifications.
-
-<br>
-
-![Version](https://img.shields.io/badge/version-1.0.0-6366f1?style=for-the-badge)
-![Paymenter](https://img.shields.io/badge/Paymenter-v2-22c55e?style=for-the-badge)
-![PHP](https://img.shields.io/badge/PHP-8.1%2B-777BB4?style=for-the-badge)
-![License](https://img.shields.io/badge/License-Premium-f59e0b?style=for-the-badge)
-
-**Developed by [Para](https://github.com/ItzMePara9)**
+[![Version](https://img.shields.io/badge/version-1.0.0-6366f1?style=for-the-badge))
+[![Paymenter](https://img.shields.io/badge/Paymenter-v2-22c55e?style=for-the-badge)](https://paymenter.org)
+[![PHP](https://img.shields.io/badge/PHP-8.1+-8B5CF6?style=for-the-badge)](https://php.net)
+[![License](https://img.shields.io/badge/license-Premium-f59e0b?style=for-the-badge)](#license)
 
 ---
 
 </div>
 
-## ✨ Overview
+## 🎯 What is Fampay Gateway?
 
-**Fampay Gateway** is a premium payment gateway extension built for **Paymenter v2**, designed to simplify UPI payments for Indian hosting providers, businesses, and digital service platforms.
+Fampay Gateway is a **native Paymenter v2 extension** that enables UPI payments via FamPay. It provides a complete payment flow — from generating a QR code to automatically verifying the payment via Gmail — without any manual intervention.
 
-It combines a modern payment experience with automated transaction verification, eliminating the need for manually checking every payment.
-
-Customers can scan a QR code or open their preferred UPI application, complete their payment, and let the gateway automatically verify the transaction through Gmail.
-
-### Why Fampay Gateway?
-
-- No manual payment confirmation.
-- No additional payment gateway API required.
-- Automatic transaction verification through Gmail IMAP.
-- Compatible with popular UPI applications.
-- Real-time Discord payment notifications.
-- Modern, responsive payment interface.
+**Built for Indian businesses** that need to accept UPI payments through their Paymenter billing panel.
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
-### 💳 Modern Payment Experience
+### 💳 Payment Experience
+- **Dynamic UPI QR Code** — Auto-generated with amount and reference pre-filled
+- **Mobile UPI Deep Link** — "Pay using UPI App" button opens GPay, PhonePe, Paytm, etc.
+- **Countdown Timer** — Animated ring timer with configurable expiry (default: 10 min)
+- **Real-time Status** — Live polling with instant confirmation on payment
+- **Premium UI** — Professional dark theme with glassmorphism, gradients, and micro-animations
 
-- **Dynamic UPI QR Codes** – Automatically generate QR codes with pre-filled payment amounts and invoice references.
-- **UPI Deep Linking** – Open Google Pay, PhonePe, Paytm, and other supported UPI applications.
-- **Live Countdown** – Animated payment expiration timer.
-- **Real-Time Payment Status** – Automatically refresh payment status without reloading the page.
-- **Premium Interface** – Modern dark UI with glassmorphism, gradients, and smooth animations.
-- **Responsive Design** – Optimized for desktop, tablets, and mobile devices.
+### 🔍 Automatic Payment Verification
+- **Gmail IMAP Scanning** — Automatically checks Gmail for FamPay payment notification emails
+- **Smart Matching** — Two-pass matching system (note match → amount fallback) for accuracy
+- **Concurrent Payment Safety** — Unique digits-only invoice references prevent cross-matching
+- **Transaction Deduplication** — Cache-based dedup prevents double-claiming
+- **Multiple Regex Patterns** — Robust email parsing handles various FamPay email formats
 
-### 🔐 Automated Payment Verification
+### 📊 Discord Webhook Logging
+- **Real-time Embeds** — Color-coded Discord messages for every payment event
+- **7 Event Types** — Gateway triggered, email checking, email found, confirmed, expired, errors, test results
+- **Full Details** — Invoice ID, amount, sender, transaction ID, UTR, note match status
 
-- **Gmail IMAP Integration** – Automatically scan Gmail for incoming FamPay payment notifications.
-- **Smart Transaction Matching** – Two-pass verification using invoice references and payment amounts.
-- **Duplicate Protection** – Prevent previously processed transactions from being claimed again.
-- **Concurrent Payment Handling** – Reduce incorrect payment matching when multiple customers pay simultaneously.
-- **Flexible Email Parsing** – Multiple regex patterns to handle different notification formats.
-- **Automatic Invoice Confirmation** – Mark eligible invoices as paid after successful verification.
+### 🔧 Admin Tools
+- **Visual Test Page** — One-click diagnostic page tests IMAP, UPI, Gmail, Discord
+- **Detailed Error Messages** — Every failure includes a fix suggestion
+- **Latest Email Preview** — See exactly what the gateway extracts from FamPay emails
+- **Debug Mode** — Verbose Laravel logging for troubleshooting
+- **All Config in Admin UI** — No file editing required
 
-### 📡 Discord Integration
+---
 
-Receive real-time payment notifications directly in your Discord server.
+## 📦 Requirements
 
-Supported event notifications:
-
-| Event | Description |
+| Requirement | Details |
 |---|---|
-| 🔔 Gateway Triggered | Customer opens the payment page |
-| 🔍 Checking Email | Gmail verification begins |
-| 📩 Email Found | Payment notification detected |
-| ✅ Payment Confirmed | Transaction successfully verified |
-| ⏰ Payment Expired | Payment session expires |
-| ❌ Verification Error | An error occurs during verification |
-| 🧪 Test Results | Diagnostic test results |
-
-Notifications can include invoice IDs, payment amounts, transaction references, UTR details, and verification information.
-
-### 🛠️ Administration & Diagnostics
-
-- Centralized configuration through the Paymenter admin panel.
-- Built-in diagnostic and connection testing page.
-- Gmail IMAP connection verification.
-- UPI ID validation.
-- FamPay notification email preview.
-- Discord webhook testing.
-- Detailed error reporting with troubleshooting suggestions.
-- Optional debug logging for developers.
+| **Paymenter** | v2 (Laravel-based) |
+| **PHP** | 8.1 or higher |
+| **PHP IMAP Extension** | `php-imap` |
+| **Gmail Account** | With 2-Step Verification + App Password |
+| **FamPay Account** | UPI ID that receives payments |
+| **Discord Webhook** | *(Optional)* For real-time logging |
 
 ---
 
-## 📋 Requirements
+## 🚀 Installation
 
-Make sure your server meets the following requirements before installation.
-
-| Component | Requirement |
-|---|---|
-| Paymenter | Version 2 |
-| PHP | 8.1 or higher |
-| PHP Extension | IMAP |
-| Composer | Compatible with your Paymenter installation |
-| Gmail | Gmail account with 2-Step Verification |
-| Gmail App Password | Required for IMAP authentication |
-| FamPay | Active UPI ID |
-| Discord Webhook | Optional |
-
----
-
-## 📦 Installation
-
-### 1. Install PHP IMAP
-
-For Ubuntu or Debian:
+### Step 1 — Install PHP IMAP Extension
 
 ```bash
-sudo apt update
-sudo apt install php-imap -y
-```
-
-Restart your PHP-FPM service. Replace `8.2` with your installed PHP version.
-
-```bash
+# Ubuntu / Debian
+sudo apt install php-imap
 sudo systemctl restart php8.2-fpm
+
+# Verify
+php -m | grep imap
 ```
 
-Verify the extension:
+### Step 2 — Upload Extension
 
-```bash
-php -m | grep -i imap
+Upload the `FampayGateway` folder to your Paymenter extensions directory:
+
 ```
-
-### 2. Download the Extension
-
-Upload the `FampayGateway` directory to:
-
-```text
 /var/www/paymenter/extensions/Gateways/FampayGateway/
 ```
 
-Make sure the directory structure is correct.
-
-### 3. Regenerate Composer Autoload
-
-Navigate to your Paymenter installation:
+### Step 3 — Dump Autoload
 
 ```bash
 cd /var/www/paymenter
 composer dump-autoload
 ```
 
-### 4. Enable the Gateway
+### Step 4 — Enable in Admin Panel
 
-1. Open your Paymenter administration panel.
-2. Navigate to **Admin → Gateways**.
-3. Create a new payment gateway.
-4. Select **Fampay Gateway**.
-5. Configure your UPI, Gmail, and Discord settings.
-6. Save your configuration.
-
-Your gateway is now ready for configuration testing.
+1. Go to **Admin → Gateways → Create**
+2. Select **Fampay Gateway**
+3. Fill in the configuration fields
+4. Save
 
 ---
 
 ## ⚙️ Configuration
 
-Configure the following settings from the Paymenter administration panel.
-
-| Setting | Description |
-|---|---|
-| UPI ID | Your FamPay UPI ID |
-| Payee Name | Name displayed during UPI payment |
-| Gmail Email | Gmail account receiving payment notifications |
-| Gmail App Password | Google-generated 16-character App Password |
-| Payment Timeout | Payment expiration time in minutes |
-| Poll Interval | Gmail verification interval in seconds |
-| FamPay Sender | Expected sender email address |
-| Debug Mode | Enables detailed diagnostic logging |
-| Discord Webhook | Discord notification webhook URL |
-
-**Important:** Keep your Gmail App Password and Discord webhook private. Never publish them in your repository or share them with untrusted users.
+| Setting | Description | Required |
+|---|---|---|
+| **UPI ID** | Your FamPay UPI ID (e.g., `user@fam`) | ✅ |
+| **Payee Name** | Name shown to payer on UPI screen | ✅ |
+| **Gmail Email** | Gmail receiving FamPay notifications | ✅ |
+| **Gmail App Password** | 16-char App Password from Google | ✅ |
+| **Payment Timeout** | QR expiry time in minutes (default: 10) | ✅ |
+| **Poll Interval** | Check frequency in seconds (default: 10) | ✅ |
+| **FamPay Sender** | FamPay's notification email | ✅ |
+| **Debug Mode** | Enable verbose logging | ❌ |
+| **Discord Webhook** | Webhook URL for payment logs | ❌ |
+| **Test Connection** | Auto-generated test page URL | ❌ |
 
 ---
 
 ## 🔑 Gmail App Password Setup
 
-Fampay Gateway uses Gmail IMAP to detect payment notifications.
+**No Google Cloud project needed — takes 2 minutes.**
 
-You do not need a Google Cloud project.
-
-### Step 1 – Enable 2-Step Verification
-
-Visit:
-
-https://myaccount.google.com/security
-
-Enable 2-Step Verification on your Gmail account.
-
-### Step 2 – Generate an App Password
-
-Visit:
-
-https://myaccount.google.com/apppasswords
-
-Generate an App Password for your application.
-
-### Step 3 – Configure Paymenter
-
-Enter your:
-
-- Gmail email address.
-- Generated Gmail App Password.
-
-Save the configuration and use the diagnostic page to test the connection.
+1. **Enable 2-Step Verification** → [Google Security](https://myaccount.google.com/security)
+2. **Generate App Password** → [App Passwords](https://myaccount.google.com/apppasswords)
+3. **Enter in Paymenter** → Gmail Email + 16-char App Password
 
 ---
 
-## 🔄 Payment Workflow
+## 🔄 How It Works
 
-```text
-          CUSTOMER
-              |
-              v
-       Opens Payment Page
-              |
-              v
-      QR Code + UPI Deep Link
-              |
-              v
-       Customer Makes Payment
-              |
-              v
-        Paymenter Polling
-              |
-              v
-        Gmail IMAP Scanner
-              |
-              v
-       Transaction Matching
-              |
-         +----+----+
-         |         |
-         v         v
-      MATCHED   NOT FOUND
-         |         |
-         v         v
-   Verify Details  Continue
-         |
-         v
-   Confirm Transaction
-         |
-         v
-    Invoice Paid
-         |
-         v
-  Discord Notification
+```
+┌─────────────────────────────────────────────────┐
+│  1. User clicks "Pay Invoice"                   │
+│     → QR code + UPI button displayed            │
+│     → 10-minute countdown starts                │
+│     → Discord: 🔔 Gateway Triggered             │
+├─────────────────────────────────────────────────┤
+│  2. User scans QR / taps UPI button             │
+│     → Payment made with auto-filled amount      │
+│     → Reference: invoice digits only            │
+├─────────────────────────────────────────────────┤
+│  3. Page polls server every N seconds           │
+│     → Server checks Gmail via IMAP              │
+│     → Matches amount + reference + time window  │
+│     → Discord: 📧 Checking / 📬 Found           │
+├─────────────────────────────────────────────────┤
+│  4. Payment confirmed                           │
+│     → Invoice marked as paid automatically      │
+│     → User redirected to services               │
+│     → Discord: ✅ Confirmed                      │
+└─────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🛡️ Transaction Safety
+## 🛡️ Concurrent Payment Safety
 
-Fampay Gateway includes several mechanisms to reduce incorrect payment confirmations.
+When multiple users purchase simultaneously:
 
-| Protection | Description |
+| Feature | How It Protects |
 |---|---|
-| Unique Invoice Reference | Uses invoice-specific numeric references |
-| Two-Pass Matching | Attempts exact reference matching before amount fallback |
-| Transaction Deduplication | Prevents duplicate transaction claims |
-| Multi-Candidate Protection | Avoids ambiguous amount-only matches |
-| Payment Timeout | Prevents expired payment sessions from remaining active |
-
-**Note:** Amount-only matching should only be used when there is exactly one eligible candidate. It is not equivalent to cryptographic payment verification. Always validate the transaction details available in the notification before confirming an invoice.
+| **Unique Reference** | Each invoice gets its numeric invoice ID or number as the UPI note |
+| **Two-Pass Matching** | Pass 1: exact note match. Pass 2: amount-only (single candidate only) |
+| **Transaction Dedup** | Confirmed txn IDs are cached 30min to prevent double-claiming |
+| **Multi-Candidate Block** | Refuses to auto-match when multiple payments have same amount but no note match |
 
 ---
 
-## 🧪 Diagnostic & Testing
+## 🧪 Testing
 
-Fampay Gateway includes a built-in diagnostic page to help administrators identify configuration problems.
+Visit the built-in diagnostic page (URL auto-shown in admin config):
 
-Access the test page using the URL displayed in the gateway configuration.
-
-Example:
-
-```text
+```
 https://yourdomain.com/extensions/gateways/FampayGateway/test
 ```
 
-### Available Tests
-
-- PHP IMAP extension availability.
-- UPI ID format validation.
-- Gmail configuration validation.
-- Gmail IMAP authentication.
-- FamPay notification email detection.
-- Latest notification parsing preview.
-- Discord webhook connectivity.
-
-Use the diagnostic page before accepting live payments.
+Tests performed:
+- ✅ PHP IMAP extension installed
+- ✅ UPI ID format validation
+- ✅ Gmail credentials present
+- ✅ Gmail IMAP connection (with auth error details)
+- ✅ FamPay email search (last 7 days)
+- ✅ Latest email parsing preview
+- ✅ Discord webhook connectivity
 
 ---
 
-## 📁 Project Structure
+## 📁 File Structure
 
-```text
+```
 FampayGateway/
-│
-├── FampayGateway.php
-│   └── Main Paymenter gateway implementation
-│
-├── GmailVerifier.php
-│   └── Gmail IMAP integration and transaction parsing
-│
-├── DiscordLogger.php
-│   └── Discord webhook notification system
-│
-├── routes.php
-│   └── Gateway route definitions
-│
+├── FampayGateway.php          # Main gateway (config, pay, check, test)
+├── GmailVerifier.php          # IMAP email checking + parsing
+├── DiscordLogger.php          # Discord webhook embeds
+├── routes.php                 # Route definitions
 ├── resources/
 │   └── views/
-│       └── pay.blade.php
-│           └── Customer payment interface
-│
+│       └── pay.blade.php      # Payment UI
 └── README.md
 ```
 
@@ -330,83 +207,41 @@ FampayGateway/
 
 ## 🔧 Troubleshooting
 
-| Issue | Possible Solution |
+| Problem | Solution |
 |---|---|
-| IMAP connection failed | Verify Gmail credentials and App Password |
-| IMAP extension missing | Install `php-imap` and restart PHP-FPM |
-| Payments not detected | Check Gmail inbox, spam folder, and Laravel logs |
-| QR code not loading | Verify external QR service connectivity |
-| Payment timer expires unexpectedly | Check server time and payment session initialization |
-| Incorrect payment matching | Verify invoice reference and transaction matching logic |
-| Discord notifications unavailable | Check webhook URL and outbound server connectivity |
-
-### Debug Logs
-
-Enable Debug Mode and inspect:
-
-```bash
-tail -f /var/www/paymenter/storage/logs/laravel.log
-```
-
-Avoid exposing logs publicly because they may contain sensitive configuration or transaction information.
+| **IMAP connection failed** | Verify App Password. Generate a new one at [Google App Passwords](https://myaccount.google.com/apppasswords) |
+| **php-imap not installed** | `sudo apt install php-imap && sudo systemctl restart php*-fpm` |
+| **Payment not detected** | Enable Debug Mode → check `storage/logs/laravel.log`. Verify FamPay emails are in inbox (not spam) |
+| **QR not loading** | Ensure server can reach `api.qrserver.com`. Falls back to Google Charts, then text display |
+| **Timer expires instantly** | Update to latest version — this was fixed with session-based timer start |
+| **Wrong payment matched** | Users must keep the UPI remark as the invoice digits shown on the page. The UI warns them about this |
 
 ---
 
 ## 📝 Changelog
 
-### Version 1.0.0
-
-- Initial release of Fampay Gateway.
-- Dynamic UPI QR code generation.
-- UPI mobile application deep linking.
-- Gmail IMAP payment verification.
-- Automatic transaction matching.
-- Duplicate transaction protection.
-- Concurrent payment handling.
-- Discord webhook integration.
-- Built-in diagnostic page.
-- Premium responsive payment interface.
-
----
-
-## 🔒 Security Notice
-
-- Never expose Gmail App Passwords.
-- Never publish Discord webhook URLs.
-- Use HTTPS for your Paymenter installation.
-- Restrict access to diagnostic pages.
-- Keep Paymenter and PHP updated.
-- Validate payment notifications before marking invoices as paid.
-- Do not treat an email notification alone as cryptographic proof of payment.
+### v1.0.0
+- Initial release
+- UPI QR code generation + mobile deep linking
+- Gmail IMAP payment verification with App Passwords
+- Two-pass matching with concurrent payment safety
+- Discord webhook logging (7 event types)
+- Visual admin test page
+- Premium payment UI with responsive design
 
 ---
 
 ## 📄 License
 
-**Premium Software – All Rights Reserved.**
-
-This extension is distributed as premium software.
-
-- Unauthorized redistribution is prohibited.
-- Reselling without permission is prohibited.
-- Modification and redistribution are subject to the developer's authorization.
+This is a **premium extension**. All rights reserved.
+Unauthorized redistribution or resale is prohibited.
 
 ---
 
 <div align="center">
 
-# ⚡ PARA
+**Built with ❤️ by Rolex Dev**
 
-**Designed & Developed by Para**
-
-Building tools. Creating solutions. Engineering possibilities.
-
-[GitHub](https://github.com/ItzMePara9)
-
----
-
-<sub>Fampay Gateway · Paymenter v2 · Version 1.0.0</sub>
-
-**© 2026 Para. All Rights Reserved.**
+*Fampay Gateway — Developed by Rolex Dev*
 
 </div>
