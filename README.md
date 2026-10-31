@@ -240,8 +240,8 @@ Unauthorized redistribution or resale is prohibited.
 
 <div align="center">
 
-**Built with ❤️ by Rolex Dev**
+**Built with ❤️ by Para.exe**
 
-*Fampay Gateway — Developed by Rolex Dev*
+*Fampay Gateway — Developed by para.dev*
 
 </div>
